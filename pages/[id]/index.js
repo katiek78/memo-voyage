@@ -4,7 +4,7 @@ import Link from 'next/link'
 import dbConnect from '../../lib/dbConnect'
 import Journey from '../../models/Journey'
 
-/* Allows you to view pet card info and delete pet card*/
+/* Allows you to view journey info, points and delete journey*/
 const JourneyPage = ({ journey }) => {
   const router = useRouter()
   const [message, setMessage] = useState('')
@@ -23,6 +23,11 @@ const JourneyPage = ({ journey }) => {
 
   return (
     <div key={journey._id}>
+      <h2>{journey.name}</h2>
+      {(!journey.points || journey.points.length === 0) &&
+        <h3>Your journey doesn't have any points yet.</h3>
+      }
+      {journey.points?.map(point => 
       <div className="card">
         {/* <img src={journey.image_url} /> */}
         <h5 className="pet-name">{journey.name}</h5>
@@ -58,6 +63,9 @@ const JourneyPage = ({ journey }) => {
           </div>
         </div>
       </div>
+      )}
+
+      <button className="btn add">Add a point</button>
       {message && <p>{message}</p>}
     </div>
   )

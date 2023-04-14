@@ -9,6 +9,11 @@ const JourneySchema = new mongoose.Schema({
     required: [true, 'Please provide a name for this journey.'],
     maxlength: [60, 'Name cannot be more than 60 characters'],
   },
+  points: {
+    /* List of journey points */
+
+    type: Array,
+  },
 })
 
 export default mongoose.models.Journey || mongoose.model('Journey', JourneySchema)
