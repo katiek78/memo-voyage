@@ -65,7 +65,9 @@ const JourneyPage = ({ journey }) => {
       </div>
       )}
 
+      <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
       <button className="btn add">Add a point</button>
+      </Link>
       {message && <p>{message}</p>}
     </div>
   )
