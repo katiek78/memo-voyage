@@ -1,21 +1,21 @@
 import Link from 'next/link'
 import dbConnect from '../lib/dbConnect'
-import Pet from '../models/Pet'
+import Journey from '../models/Journey'
 
-const Index = ({ pets }) => (
+const Index = ({ journeys }) => (
   <>
-    {/* Create a card for each pet */}
-    {pets.map((pet) => (
-      <div key={pet._id}>
+    {/* Create a card for each journey */}
+    {journeys.map((journey) => (
+      <div key={journey._id}>
         <div className="card">
-          <img src={pet.image_url} />
-          <h5 className="pet-name">{pet.name}</h5>
+          {/* <img src={pet.image_url} /> */}
+          <h5 className="pet-name">{journey.name}</h5>
           <div className="main-content">
-            <p className="pet-name">{pet.name}</p>
-            <p className="owner">Owner: {pet.owner_name}</p>
+            <p className="pet-name">{journey.name}</p>
+            {/* <p className="owner">Owner: {pet.owner_name}</p>
 
             {/* Extra Pet Info: Likes and Dislikes */}
-            <div className="likes info">
+            {/* <div className="likes info">
               <p className="label">Likes</p>
               <ul>
                 {pet.likes.map((data, index) => (
@@ -29,14 +29,14 @@ const Index = ({ pets }) => (
                 {pet.dislikes.map((data, index) => (
                   <li key={index}>{data} </li>
                 ))}
-              </ul>
-            </div>
+              </ul> */}
+            {/* </div> */}
 
             <div className="btn-container">
-              <Link href="/[id]/edit" as={`/${pet._id}/edit`} legacyBehavior>
+              <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
                 <button className="btn edit">Edit</button>
               </Link>
-              <Link href="/[id]" as={`/${pet._id}`} legacyBehavior>
+              <Link href="/[id]" as={`/${journey._id}`} legacyBehavior>
                 <button className="btn view">View</button>
               </Link>
             </div>
@@ -52,14 +52,14 @@ export async function getServerSideProps() {
   await dbConnect()
 
   /* find all the data in our database */
-  const result = await Pet.find({})
-  const pets = result.map((doc) => {
-    const pet = doc.toObject()
-    pet._id = pet._id.toString()
-    return pet
+  const result = await Journey.find({})
+  const journeys = result.map((doc) => {
+    const journey = doc.toObject()
+    journey._id = journey._id.toString()
+    return journey
   })
 
-  return { props: { pets: pets } }
+  return { props: { journeys: journeys } }
 }
 
 export default Index

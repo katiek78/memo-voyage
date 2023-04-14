@@ -87,7 +87,7 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
     e.preventDefault()
     const errs = formValidate()
     if (Object.keys(errs).length === 0) {
-      forNewPet ? postData(form) : putData(form)
+      forNewJourney ? postData(form) : putData(form)
     } else {
       setErrors({ errs })
     }
