@@ -85,8 +85,22 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
   const formValidate = () => {
     let err = {}
     if (!form.name) err.name = 'Name is required'   
+    form.location = validateLocation(form.location);
     return err
   }
+
+   const validateLocation = (location) => {
+    function getPosition(str, char, index) {
+        return str.split(char, index).join(char).length;
+      }
+
+    //if it includes @ then parse as a Google Street View URL
+    if (location.includes('@')) {
+        const newLocation = location.slice(location.indexOf('@') + 1, getPosition(location, ',', 2));
+        location = newLocation;
+    }
+    return location;
+}
 
   const handleSubmit = (e) => {
     e.preventDefault()
