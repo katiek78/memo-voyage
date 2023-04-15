@@ -1,5 +1,4 @@
 import dbConnect from '../../../lib/dbConnect'
-// import Point from '../../../models/Point'
 import Journey from '../../../models/Journey'
 
 export default async function handler(req, res) {
@@ -11,32 +10,41 @@ export default async function handler(req, res) {
   await dbConnect()
 
   switch (method) {
-    // case 'GET' /* Get a model by its ID */:
-    //   try {
-    //     const point = await Point.findById(id)
-    //     if (!point) {
-    //       return res.status(400).json({ success: false })
-    //     }
-    //     res.status(200).json({ success: true, data: point })
-    //   } catch (error) {
-    //     res.status(400).json({ success: false })
-    //   }
-    //   break
+    case 'GET' /* Get a model by a point ID */:
+      try {
+        const journey = await Journey.find({points: {$elemMatch: {_id: id}}});
+        if (!journey) {
+          return res.status(400).json({ success: false })
+        }
+        res.status(200).json({ success: true, data: journey })
+      } catch (error) {
+        res.status(400).json({ success: false })
+      }
+      break
 
-    // case 'PUT' /* Edit a model by its ID */:
-    //   try {
-    //     const point = await Point.findByIdAndUpdate(id, req.body, {
-    //       new: true,
-    //       runValidators: true,
-    //     })
-    //     if (!point) {
-    //       return res.status(400).json({ success: false })
-    //     }
-    //     res.status(200).json({ success: true, data: point })
-    //   } catch (error) {
-    //     res.status(400).json({ success: false })
-    //   }
-    //   break
+    case 'PUT' /* Edit a model by a point ID */:
+      try {
+        // let myquery = {points: {$elemMatch:{_id: new ObjectId(req.params.id)}}};
+        // let newvalues = {
+        //   $set: { 'points.$.name':
+        //     req.body.name, 'points.$.location' : req.body.location
+        //   },
+        // };
+        const journey = await Journey.findOneAndUpdate(
+          {points: {$elemMatch:{_id: id}}}, 
+          { $set: { 'points.$.name': req.body.name, 'points.$.location' : req.body.location}
+      }, {
+          new: true,
+          runValidators: true,
+        })        
+        if (!journey) {
+          return res.status(400).json({ success: false })
+        }
+        res.status(200).json({ success: true, data: journey })
+      } catch (error) {
+        res.status(400).json({ success: false })
+      }
+      break
 
     // case 'DELETE' /* Delete a model by its ID */:
     //   try {

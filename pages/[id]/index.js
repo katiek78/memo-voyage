@@ -55,8 +55,8 @@ const JourneyPage = ({ journey }) => {
             </ul>
           </div> */}
 
-          <div className="btn-container">
-            <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
+          <div className="point-btn-container">
+            <Link href="/[id]/editPoint" as={`/${point._id}/editPoint`} legacyBehavior>
               <button className="btn edit">Edit</button>
             </Link>
             <button className="btn delete" onClick={handleDelete}>

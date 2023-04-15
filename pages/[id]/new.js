@@ -2,7 +2,8 @@ import PointForm from '../../components/PointForm'
 
 const NewPoint = () => {
   const pointForm = {
-    name: ''
+    name: '',
+    location: ''
   }
 
   return <PointForm formId="add-point-form" pointForm={pointForm} />
