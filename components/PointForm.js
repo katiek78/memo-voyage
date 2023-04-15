@@ -34,9 +34,9 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
       }
 
       const { data } = await res.json()
-
+  
       mutate(`/api/points/${id}`, data, false) // Update the local data without a revalidation
-      router.push('/')
+      router.push(`/${data._id}`)
     } catch (error) {
       setMessage('Failed to update journey')
     }
@@ -62,7 +62,8 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
         throw new Error(res.status)
       }
 
-      router.push('/')
+      const { data } = await res.json()
+      router.push(`/${data._id}`)
     } catch (error) {
       setMessage('Failed to add point')
     }

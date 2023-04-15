@@ -16,7 +16,7 @@ const JourneyPage = ({ journey }) => {
       await fetch(`/api/journeys/${journeyID}`, {
         method: 'Delete',
       })
-      router.push('/')
+      router.push(`/${journeyID}`)
     } catch (error) {
       setMessage('Failed to delete the journey.')
     }
@@ -28,9 +28,9 @@ const JourneyPage = ({ journey }) => {
       await fetch(`/api/points/${pointID}`, {
         method: 'Delete',
       })
-      router.push('/')
+      router.push(`/${journeyID}`)
     } catch (error) {
-      setMessage('Failed to delete the journey.')
+      setMessage('Failed to delete the point.')
     }
   }
 
