@@ -107,6 +107,7 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
           required
         />
 
+        <label htmlFor="location">Location</label>
         <input
           type="text"
           maxLength="100"
