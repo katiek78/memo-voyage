@@ -49,7 +49,7 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
           Accept: contentType,
           'Content-Type': contentType,
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify({...form, points: []}),
       })
 
       // Throw error with status code in case Fetch API req failed

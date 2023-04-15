@@ -43,8 +43,11 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form) => {
+    
+    const { id } = router.query
+
     try {
-      const res = await fetch('/api/points', {
+      const res = await fetch(`/api/points/${id}`, {
         method: 'POST',
         headers: {
           Accept: contentType,
@@ -113,8 +116,7 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
           maxLength="100"
           name="location"
           value={form.location}
-          onChange={handleChange}
-          required
+          onChange={handleChange}          
         />
         
         <button type="submit" className="btn">

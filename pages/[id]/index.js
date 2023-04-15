@@ -30,9 +30,9 @@ const JourneyPage = ({ journey }) => {
       {journey.points?.map(point => 
       <div className="card">
         {/* <img src={journey.image_url} /> */}
-        <h5 className="pet-name">{journey.name}</h5>
+        <h5 className="pet-name">{point.name}</h5>
         <div className="main-content">
-          <p className="pet-name">{journey.name}</p>
+          <p className="pet-name">{point.name}</p>
           {/* <p className="owner">Owner: {pet.owner_name}</p> */}
 
           {/* Extra Pet Info: Likes and Dislikes */}
@@ -76,9 +76,9 @@ const JourneyPage = ({ journey }) => {
 export async function getServerSideProps({ params }) {
   await dbConnect()
 
-  const journey = await Journey.findById(params.id).lean()
+  let journey = await Journey.findById(params.id).lean()
+  journey = JSON.parse(JSON.stringify(journey))
   journey._id = journey._id.toString()
-
   return { props: { journey } }
 }
 

@@ -54,7 +54,8 @@ export async function getServerSideProps() {
   /* find all the data in our database */
   const result = await Journey.find({})
   const journeys = result.map((doc) => {
-    const journey = doc.toObject()
+    //const journey = doc.toObject()
+    const journey = JSON.parse(JSON.stringify(doc));
     journey._id = journey._id.toString()
     return journey
   })
