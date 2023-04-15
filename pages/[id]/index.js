@@ -4,6 +4,7 @@ import Link from 'next/link'
 import dbConnect from '../../lib/dbConnect'
 import Journey from '../../models/Journey'
 import EmbedStreetView from '../../components/EmbedStreetView'
+import { refreshData } from '../../lib/refreshData'
 
 /* Allows you to view journey info, points and delete journey*/
 const JourneyPage = ({ journey }) => {
@@ -16,7 +17,7 @@ const JourneyPage = ({ journey }) => {
       await fetch(`/api/journeys/${journeyID}`, {
         method: 'Delete',
       })
-      router.push(`/${journeyID}`)
+      router.push(`/`)      
     } catch (error) {
       setMessage('Failed to delete the journey.')
     }
@@ -28,7 +29,8 @@ const JourneyPage = ({ journey }) => {
       await fetch(`/api/points/${pointID}`, {
         method: 'Delete',
       })
-      router.push(`/${journeyID}`)
+      //router.push(`/${journeyID}`)
+      refreshData(router);
     } catch (error) {
       setMessage('Failed to delete the point.')
     }
