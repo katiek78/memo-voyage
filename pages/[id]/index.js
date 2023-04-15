@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import dbConnect from '../../lib/dbConnect'
 import Journey from '../../models/Journey'
+import EmbedStreetView from '../../components/EmbedStreetView'
 
 /* Allows you to view journey info, points and delete journey*/
 const JourneyPage = ({ journey }) => {
@@ -33,6 +34,7 @@ const JourneyPage = ({ journey }) => {
         <h5 className="pet-name">{point.name}</h5>
         <div className="main-content">
           <p className="pet-name">{point.name}</p>
+          <EmbedStreetView width={270} height={200} location={point.location} />
           {/* <p className="owner">Owner: {pet.owner_name}</p> */}
 
           {/* Extra Pet Info: Likes and Dislikes */}
