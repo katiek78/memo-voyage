@@ -22,6 +22,19 @@ const JourneyPage = ({ journey }) => {
     }
   }
 
+  const handleDeletePoint = async (pointID, e) => {
+    
+    try {
+      await fetch(`/api/points/${pointID}`, {
+        method: 'Delete',
+      })
+      router.push('/')
+    } catch (error) {
+      setMessage('Failed to delete the journey.')
+    }
+  }
+
+
   return (
     <div key={journey._id}>
       <h2>{journey.name}</h2>
@@ -59,7 +72,7 @@ const JourneyPage = ({ journey }) => {
             <Link href="/[id]/editPoint" as={`/${point._id}/editPoint`} legacyBehavior>
               <button className="btn edit">Edit</button>
             </Link>
-            <button className="btn delete" onClick={handleDelete}>
+            <button className="btn delete" onClick={() => handleDeletePoint(point._id)}>
               Delete
             </button>
           </div>

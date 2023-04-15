@@ -46,17 +46,24 @@ export default async function handler(req, res) {
       }
       break
 
-    // case 'DELETE' /* Delete a model by its ID */:
-    //   try {
-    //     const deletedPoint = await Point.deleteOne({ _id: id })
-    //     if (!deletedPoint) {
-    //       return res.status(400).json({ success: false })
-    //     }
-    //     res.status(200).json({ success: true, data: {} })
-    //   } catch (error) {
-    //     res.status(400).json({ success: false })
-    //   }
-    //   break
+    case 'DELETE' /* Delete a point by its ID */:
+      try {
+        const journey = await Journey.findOneAndUpdate(
+          {points: {$elemMatch:{_id: id}}}, 
+          // { $set: { 'points.$.name': req.body.name, 'points.$.location' : req.body.location}
+          {$pull: {points: {_id: {$eq: id}}}}
+      , {
+          new: true,
+          runValidators: true,
+        })
+        if (!journey) {
+          return res.status(400).json({ success: false })
+        }
+        res.status(200).json({ success: true, data: {} })
+      } catch (error) {
+        res.status(400).json({ success: false })
+      }
+      break
 
     case 'POST' /* Add a point by journey ID */ :
         console.log(id);
