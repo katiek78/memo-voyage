@@ -31,7 +31,7 @@ const JourneyPage = ({ journey }) => {
       {journey.points?.map(point => 
       <div className="point-card">
         {/* <img src={journey.image_url} /> */}
-        <h5 className="pet-name">{point.name}</h5>
+        {/* <h5 className="pet-name">{point.name}</h5> */}
         <div className="card-content">
           <p className="pet-name">{point.name}</p>
           <EmbedStreetView width={270} height={200} location={point.location} />
