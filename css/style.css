@@ -50,13 +50,12 @@
   --shadow: transparent;
   box-shadow: 0 0 10px 5px var(--shadow);
   position: relative;
-  font-size: 100%;
+  font-size: 100%;  
 }
 
-.card:hover {
-  --shadow: rgba(53, 53, 53, 0.103);
-  /* transform: rotateY(180deg) translate(20px, 20px);
-  background: pink; */
+.point-card:hover {
+  --shadow: rgba(53, 53, 53, 0.103); 
+  box-shadow: 0 0 10px 5px var(--shadow);
 }
 
 .card:hover .main-content {
@@ -74,6 +73,14 @@
   object-fit: cover;
 }
 
+.card-content {
+  padding: 25px; 
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
+ 
+}
+
 .main-content {
   padding: 25px;
   position: absolute;
@@ -84,6 +91,18 @@
   height: 100%;
   opacity: 0;
   pointer-events: none;
+  transition: 0.5s all;
+}
+
+.point-card {
+  display: inline-block;
+  width: 300px;
+  height: 400px;
+  overflow: hidden;
+  border: 1.25px solid rgb(233, 233, 233);
+  border-radius: 16px;
+  margin: 10px;
+  --shadow: transparent;
   transition: 0.5s all;
 }
 
