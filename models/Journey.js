@@ -16,6 +16,11 @@ const JourneySchema = new mongoose.Schema({
       location: {type: String}
     })
   ],
+  image_url: {
+    /* Url to city image */
+    required: [false],
+    type: String,
+  },
 })
 
 // const PointSchema = new mongoose.Schema({

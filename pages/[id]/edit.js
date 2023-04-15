@@ -22,6 +22,7 @@ const EditJourney = () => {
 
   const journeyForm = {
     name: journey.name,    
+    image_url: journey.image_url
   }
 
   return <JourneyForm formId="edit-journey-form" journeyForm={journeyForm} forNewJourney={false} />

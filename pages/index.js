@@ -8,7 +8,7 @@ const Index = ({ journeys }) => (
     {journeys.map((journey) => (
       <div key={journey._id}>
         <div className="card">
-          {/* <img src={pet.image_url} /> */}
+          <img src={journey.image_url} /> 
           <h5 className="pet-name">{journey.name}</h5>
           <div className="main-content">
             <p className="pet-name">{journey.name}</p>

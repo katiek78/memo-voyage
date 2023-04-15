@@ -2,7 +2,8 @@ import JourneyForm from '../components/JourneyForm'
 
 const NewJourney = () => {
   const journeyForm = {
-    name: ''
+    name: '',
+    image_url: ''
   }
 
   return <JourneyForm formId="add-journey-form" journeyForm={journeyForm} />

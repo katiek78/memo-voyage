@@ -10,6 +10,7 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
 
   const [form, setForm] = useState({
     name: journeyForm.name,   
+    image_url: journeyForm.image_url,
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -102,6 +103,15 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
           maxLength="20"
           name="name"
           value={form.name}
+          onChange={handleChange}
+          required
+        />
+
+        <label htmlFor="image_url">Image URL (optional)</label>
+        <input
+          type="url"
+          name="image_url"
+          value={form.image_url}
           onChange={handleChange}
           required
         />
