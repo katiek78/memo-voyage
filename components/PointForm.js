@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
+import LocationExplanation from './LocationExplanation'
 
 const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
   const router = useRouter()
@@ -118,7 +119,8 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
           value={form.location}
           onChange={handleChange}          
         />
-        
+        <LocationExplanation />
+
         <button type="submit" className="btn">
           Submit
         </button>
