@@ -17,35 +17,19 @@ const Index = ({ journeys }) => {
           <h5 className="pet-name">{journey.name}</h5>
           <div className="main-content">
             <p className="pet-name">{journey.name}</p>
-            {/* <p className="owner">Owner: {pet.owner_name}</p>
+           <p className="owner">{journey.points?.length} journey points</p>
 
-            {/* Extra Pet Info: Likes and Dislikes */}
-            {/* <div className="likes info">
-              <p className="label">Likes</p>
-              <ul>
-                {pet.likes.map((data, index) => (
-                  <li key={index}>{data} </li>
-                ))}
-              </ul>
+            
             </div>
-            <div className="dislikes info">
-              <p className="label">Dislikes</p>
-              <ul>
-                {pet.dislikes.map((data, index) => (
-                  <li key={index}>{data} </li>
-                ))}
-              </ul> */}
-            {/* </div> */}
-
-            <div className="btn-container">
+            
+            {/* <div className="btn-container">
               <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
                 <button className="btn edit">Edit</button>
               </Link>
               <Link href="/[id]" as={`/${journey._id}`} legacyBehavior>
                 <button className="btn view">View</button>
               </Link>
-            </div>
-          </div>
+            </div> */}          
         </div>
       </div>
     ))}
