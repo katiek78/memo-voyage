@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import dbConnect from '../lib/dbConnect'
 import Journey from '../models/Journey'
-
+import defaultCity from "../public/assets/default.jpg";
 
 const Index = ({ journeys }) => {
   const router = useRouter();
@@ -13,13 +13,13 @@ const Index = ({ journeys }) => {
     {journeys.map((journey) => (
       <div key={journey._id}>
         <div onClick={() => router.push(`/${journey._id}`)} className="card">
-          <img src={journey.image_url} /> 
+          {journey.image_url !== '' && <img src={journey.image_url} alt={`picture linked to ${journey.name} journey`} /> }
+          {(!journey.image_url || journey.image_url === '') && <img src={defaultCity.src} alt="AI-generated colourful picture of cityscape" /> }
           <h5 className="pet-name">{journey.name}</h5>
           <div className="main-content">
             <p className="pet-name">{journey.name}</p>
            <p className="owner">{journey.points?.length} journey points</p>
-
-            
+           
             </div>
             
             {/* <div className="btn-container">
