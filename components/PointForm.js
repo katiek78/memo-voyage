@@ -100,6 +100,10 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
         const newLocation = location.slice(location.indexOf('@') + 1, getPosition(location, ',', 2));
         location = newLocation;
     }
+    //if it starts with ( then parse as a coordinates set from mobile app (need to remove brackets and spaces)
+    if (location[0] === '(') {    
+        location = location.replaceAll(/[\(\)\s]/g,'');
+    }
     return location;
 }
 
