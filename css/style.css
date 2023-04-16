@@ -40,8 +40,8 @@
 /* Styles for Cards */
 .card {
   display: inline-block;
-  width: 150px; /* 300px */
-  height: 200px; /* 400px */
+  width: 300px;
+  height: 400px;
   overflow: hidden;
   border: 1.25px solid rgb(233, 233, 233);
   border-radius: 16px;
