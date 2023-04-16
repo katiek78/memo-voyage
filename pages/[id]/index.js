@@ -81,12 +81,15 @@ const JourneyPage = ({ journey }) => {
         </div>
       </div>
       )}
-
+      
       <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
       <button className="btn add">Add a point</button>
       </Link>
+      <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
+      <button className="btn edit">Edit journey</button>
+      </Link>
       <button className="btn delete" onClick={handleDelete}>
-              Delete
+              Delete journey
             </button>
       {message && <p>{message}</p>}
     </div>

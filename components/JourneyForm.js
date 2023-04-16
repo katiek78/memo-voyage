@@ -35,7 +35,7 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
       const { data } = await res.json()
 
       mutate(`/api/journeys/${id}`, data, false) // Update the local data without a revalidation
-      router.push('/')
+      router.push(`/${id}`)
     } catch (error) {
       setMessage('Failed to update journey')
     }
