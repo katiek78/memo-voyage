@@ -165,6 +165,10 @@ li {
   padding: 10px;
 }
 
+.journey-btn-container * {
+  margin:5px;
+}
+
 .btn {
   --accent: grey;
   cursor: pointer;

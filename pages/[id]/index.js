@@ -40,9 +40,23 @@ const JourneyPage = ({ journey }) => {
   return (
     <div key={journey._id}>
       <h2>{journey.name}</h2>
+      
       {(!journey.points || journey.points.length === 0) &&
         <h3>Your journey doesn't have any points yet.</h3>
       }
+
+      <div class='journey-btn-container'>
+        <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
+        <button className="btn add">Add a point</button>
+        </Link>
+        <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
+        <button className="btn edit">Edit journey</button>
+        </Link>
+        <button className="btn delete" onClick={handleDelete}>
+                Delete journey
+        </button>
+      </div>
+
       {journey.points?.map(point => 
       <div className="point-card">
         {/* <img src={journey.image_url} /> */}
@@ -82,15 +96,7 @@ const JourneyPage = ({ journey }) => {
       </div>
       )}
       
-      <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
-      <button className="btn add">Add a point</button>
-      </Link>
-      <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
-      <button className="btn edit">Edit journey</button>
-      </Link>
-      <button className="btn delete" onClick={handleDelete}>
-              Delete journey
-            </button>
+     
       {message && <p>{message}</p>}
     </div>
   )
