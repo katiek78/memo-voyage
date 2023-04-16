@@ -100,7 +100,7 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
         <label htmlFor="name">Name</label>
         <input
           type="text"
-          maxLength="20"
+          maxLength="60"
           name="name"
           value={form.name}
           onChange={handleChange}
@@ -112,8 +112,7 @@ const JourneyForm = ({ formId, journeyForm, forNewJourney = true }) => {
           type="url"
           name="image_url"
           value={form.image_url}
-          onChange={handleChange}
-          required
+          onChange={handleChange}         
         />
         
         <button type="submit" className="btn">
