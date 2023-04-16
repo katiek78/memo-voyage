@@ -105,6 +105,7 @@
   margin: 10px;
   --shadow: transparent;
   transition: 0.5s all;
+  background-color: gainsboro;
 }
 
 .owner {
