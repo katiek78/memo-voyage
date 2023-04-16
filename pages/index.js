@@ -1,13 +1,18 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import dbConnect from '../lib/dbConnect'
 import Journey from '../models/Journey'
 
-const Index = ({ journeys }) => (
+
+const Index = ({ journeys }) => {
+  const router = useRouter();
+
+  return(
   <>
     {/* Create a card for each journey */}
     {journeys.map((journey) => (
       <div key={journey._id}>
-        <div className="card">
+        <div onClick={() => router.push(`/${journey._id}`)} className="card">
           <img src={journey.image_url} /> 
           <h5 className="pet-name">{journey.name}</h5>
           <div className="main-content">
@@ -45,7 +50,8 @@ const Index = ({ journeys }) => (
       </div>
     ))}
   </>
-)
+  )
+}
 
 /* Retrieves pet(s) data from mongodb database */
 export async function getServerSideProps() {
