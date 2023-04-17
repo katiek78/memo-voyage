@@ -75,20 +75,30 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
 
   const handleChange = (e) => {
     const target = e.target     
-    const value = target.name === 'location'? validateLocation(target.value) : target.value; //coordinates change should cause street view to update
-    const name = target.name
+    //const value = target.name === 'location'? validateLocation(target.value) : target.value; //coordinates change should cause street view to update
+    
+    if (target.name === 'location') {
+      setForm(validateLocation(target.value));
+    } else {
+      const value = target.value
+      const name = target.name
+      setForm({
+        ...form,
+        [name]: value,
+      })
+      
+    }
+//    const value = validateLocation(form.location)[target.name]; //coordinates change should cause street view to update
+    
 
-    setForm({
-      ...form,
-      [name]: value,
-    })
+    //setForm(validateLocation(form.location))
   }
 
   /* Makes sure point name is filled */
   const formValidate = () => {
     let err = {}
     if (!form.name) err.name = 'Name is required'   
-    form.location = validateLocation(form.location);
+    setForm(validateLocation(form.location));
     return err
   }
 
@@ -101,12 +111,15 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
     if (location.includes('@')) {
         const newLocation = location.slice(location.indexOf('@') + 1, getPosition(location, ',', 2));
         location = newLocation;
+
+        //get heading, pitch and fov values too ****
     }
     //if it starts with ( then parse as a coordinates set from mobile app (need to remove brackets and spaces)
     if (location[0] === '(') {    
         location = location.replaceAll(/[\(\)\s]/g,'');
     }
-    return location;
+    console.log({...form, location: location})
+    return {...form, location: location};
 }
 
   const handleSubmit = (e) => {
