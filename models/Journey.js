@@ -13,7 +13,10 @@ const JourneySchema = new mongoose.Schema({
     /* List of journey points */
     new mongoose.Schema({
       name: { type: String},
-      location: {type: String}
+      location: {type: String},
+      heading: {type: Number},
+      pitch: {type: Number},
+      fov: {type: Number},
     })
   ],
   image_url: {

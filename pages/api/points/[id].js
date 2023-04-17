@@ -23,16 +23,10 @@ export default async function handler(req, res) {
       break
 
     case 'PUT' /* Edit a model by a point ID */:
-      try {
-        // let myquery = {points: {$elemMatch:{_id: new ObjectId(req.params.id)}}};
-        // let newvalues = {
-        //   $set: { 'points.$.name':
-        //     req.body.name, 'points.$.location' : req.body.location
-        //   },
-        // };
+      try {      
         const journey = await Journey.findOneAndUpdate(
           {points: {$elemMatch:{_id: id}}}, 
-          { $set: { 'points.$.name': req.body.name, 'points.$.location' : req.body.location}
+          { $set: { 'points.$.name': req.body.name, 'points.$.location' : req.body.location, 'points.$.heading' : req.body.heading, 'points.$.pitch' : req.body.pitch, 'points.$.fov' : req.body.fov}
       }, {
           new: true,
           runValidators: true,

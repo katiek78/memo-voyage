@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { mutate } from 'swr'
 import LocationExplanation from './LocationExplanation'
+import EmbedStreetView from './EmbedStreetView'
 
 const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
   const router = useRouter()
@@ -11,7 +12,10 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
 
   const [form, setForm] = useState({
     name: pointForm.name,  
-    location: pointForm.location 
+    location: pointForm.location,
+    heading: pointForm.heading || 90,
+    pitch: pointForm.pitch || 0,
+    fov: pointForm.fov || 100
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
@@ -70,10 +74,8 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
   }
 
   const handleChange = (e) => {
-    const target = e.target
-   // const value =
-     // target.name === 'poddy_trained' ? target.checked : target.value
-    const value = target.value
+    const target = e.target     
+    const value = target.name === 'location'? validateLocation(target.value) : target.value; //coordinates change should cause street view to update
     const name = target.name
 
     setForm({
@@ -139,6 +141,42 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
           onChange={handleChange}          
         />
         <LocationExplanation />
+
+        {form.location && <div>
+          <EmbedStreetView width={400} height={330} location={form.location} heading={form.heading} pitch={form.pitch} fov={form.fov} />
+          <p>Adjust the values below to customise your view:</p>
+          <label htmlFor="heading">Heading (orientation, -180 to 360)</label>
+            <input
+              type="number"
+              maxLength="4"
+              min="-180"
+              max="360"
+              name="heading"
+              value={form.heading}
+              onChange={handleChange}          
+            />
+            <label htmlFor="pitch">Pitch (up/down, -90 to 90)</label>
+            <input
+              type="number"
+              maxLength="4"
+              min="-90"
+              max="90"
+              name="pitch"
+              value={form.pitch}
+              onChange={handleChange}          
+            />
+            <label htmlFor="fov">FOV (field of view, 10 to 100)</label>
+            <input
+              type="number"
+              maxLength="4"
+              min="10"
+              max="100"
+              name="fov"
+              value={form.fov}
+              onChange={handleChange}          
+            />
+          </div>
+        }
 
         <button type="submit" className="btn">
           Submit

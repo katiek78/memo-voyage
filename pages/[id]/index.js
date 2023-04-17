@@ -63,7 +63,7 @@ const JourneyPage = ({ journey }) => {
         {/* <h5 className="pet-name">{point.name}</h5> */}
         <div className="card-content">
           <p className="pet-name">{point.name}</p>
-          <EmbedStreetView width={300} height={200} location={point.location} />
+          <EmbedStreetView width={300} height={200} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
           {/* <p className="owner">Owner: {pet.owner_name}</p> */}
 
           {/* Extra Pet Info: Likes and Dislikes */}

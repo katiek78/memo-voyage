@@ -18,14 +18,16 @@ const EditPoint = () => {
 
   if (error) return <p>Failed to load</p>
   if (isLoading) return <p>Loading...</p>
-  if (!journey) return null
-  console.log(journey);
+  if (!journey) return null  
   const thisJourney = Array.isArray(journey) ? journey[0] : journey;
   const point = thisJourney.points.filter(point => point._id === id)[0];  
 
   const pointForm = {
     name: point.name,    
-    location: point.location
+    location: point.location,
+    heading: point.heading,
+    pitch: point.pitch,
+    fov: point.fov
   }
 
   return <PointForm formId="edit-point-form" pointForm={pointForm} forNewPoint={false} />
