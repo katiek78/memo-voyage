@@ -102,24 +102,34 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
     return err
   }
 
-   const validateLocation = (location) => {
+   const validateLocation = (locationValue) => {
     function getPosition(str, char, index) {
         return str.split(char, index).join(char).length;
       }
 
     //if it includes @ then parse as a Google Street View URL
-    if (location.includes('@')) {
-        const newLocation = location.slice(location.indexOf('@') + 1, getPosition(location, ',', 2));
-        location = newLocation;
+    if (locationValue.includes('@')) {
+        const slicedLocationValue = locationValue.slice(locationValue.indexOf('@') + 1);
+        const secondCommaAt = getPosition(slicedLocationValue, ',', 2)
+        const parsedLocation = slicedLocationValue.slice(slicedLocationValue.indexOf('@') + 1, secondCommaAt);        
+        //get heading, pitch and fov values too
+        const thirdCommaAt = getPosition(slicedLocationValue, ',', 3);
+        const fov = slicedLocationValue.slice(thirdCommaAt + 1, slicedLocationValue.indexOf('y'))   
+        const fourthCommaAt = getPosition(slicedLocationValue, ',', 4)        
+        const heading = slicedLocationValue.slice(fourthCommaAt + 1, slicedLocationValue.indexOf('h'));    
+        const fifthCommaAt = getPosition(slicedLocationValue, ',', 5);
+        const pitch = slicedLocationValue.slice(fifthCommaAt + 1, slicedLocationValue.indexOf('t'));        
 
-        //get heading, pitch and fov values too ****
+        locationValue = parsedLocation;
+        return {...form, location: parsedLocation, heading, pitch: (pitch - 90).toFixed(2), fov};
     }
     //if it starts with ( then parse as a coordinates set from mobile app (need to remove brackets and spaces)
-    if (location[0] === '(') {    
-        location = location.replaceAll(/[\(\)\s]/g,'');
+    if (locationValue[0] === '(') {    
+        locationValue = locationValue.replaceAll(/[\(\)\s]/g,'');
+        return {...form, location: locationValue};
     }
-    console.log({...form, location: location})
-    return {...form, location: location};
+  
+    return {...form, location: locationValue};
 }
 
   const handleSubmit = (e) => {
@@ -166,7 +176,8 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
               max="360"
               name="heading"
               value={form.heading}
-              onChange={handleChange}          
+              onChange={handleChange}   
+              step="any"       
             />
             <label htmlFor="pitch">Pitch (up/down, -90 to 90)</label>
             <input
@@ -176,7 +187,8 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
               max="90"
               name="pitch"
               value={form.pitch}
-              onChange={handleChange}          
+              onChange={handleChange}     
+              step="any"     
             />
             <label htmlFor="fov">FOV (field of view, 10 to 100)</label>
             <input
@@ -186,7 +198,8 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
               max="100"
               name="fov"
               value={form.fov}
-              onChange={handleChange}          
+              onChange={handleChange}     
+              step="any"     
             />
           </div>
         }
