@@ -37,6 +37,12 @@
   justify-content: center;
 }
 
+details {
+  border: 2px solid grey;
+  padding: 3px;
+  font-size: 80%;
+}
+
 /* Styles for Cards */
 .card {
   display: inline-block;
