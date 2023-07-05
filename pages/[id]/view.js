@@ -78,8 +78,9 @@ const ViewPoint = () => {
         <div className="point-card point-card-large">
             <div className="card-content">
                     <p className="point-name">{sequenceNo + 1}. {point.name}</p>
-                  
+                    <p className="memo-item">{point.memoItem}</p>
                     <EmbedStreetView width={width} height={height} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
+                    
              </div>
         </div>
      </div>
