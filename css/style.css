@@ -115,8 +115,8 @@ details {
 }
 
 .point-card-large {
-  width: 1200px;
-  height: 700px;
+  width: 350px;
+  height: 350px;
 }
 
 .title {
@@ -268,5 +268,26 @@ li {
     width: 200px;
   }
 
+  .point-card-large {
+    width: 500px;
+    height: 500px;
+  }
+
+}
+
+
+@media only screen and (min-width: 1000px) {
+  .point-card-large {
+    width: 700px;
+    height: 700px;
+  }
+
+}
+
+@media only screen and (min-width: 1300px) {
+  .point-card-large {
+    width: 1200px;
+    height: 700px;
+  }
 
 }

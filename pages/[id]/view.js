@@ -35,7 +35,23 @@ const ViewPoint = () => {
 
   const pointData = getPointData(thisJourney.points, id)
   const { point, sequenceNo } = pointData;
-  
+
+  const mql = window.matchMedia('(max-width: 600px)');
+  const mobileView = mql.matches;
+  const mql2 = window.matchMedia('(min-width: 600px)');
+  const midView = mql2.matches;
+  const mql3 = window.matchMedia('(min-width: 1000px)');
+  const largeView = mql3.matches;
+
+  let width = 0, height = 0;
+    if (mobileView) {
+        width = 300, height = 200;
+    } else if (largeView) {
+        width = 900, height = 600;
+    } else {
+        width = 400, height = 300;
+    }
+    
 
   return <>
     <div className="title-and-content">
@@ -58,7 +74,7 @@ const ViewPoint = () => {
                   }
          
                     </div>
-                    <EmbedStreetView width={1150} height={600} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
+                    <EmbedStreetView width={width} height={height} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
              </div>
         </div>
      </div>
