@@ -56,10 +56,7 @@ const ViewPoint = () => {
   return <>
     <div className="title-and-content">
         <div className="title">Journey: {thisJourney.name}</div>
-        <div className="point-card point-card-large">
-            <div className="card-content">
-                    <p className="point-name">{sequenceNo + 1}. {point.name}</p>
-                    <div className="point-btn-container">       
+        <div className="journey-btn-container">       
                   {sequenceNo > 0 ?
                         <Link href="/[id]/view" as={`/${thisJourney.points[sequenceNo - 1]._id}/view`} legacyBehavior>
                         <button className="btn previous">Previous</button>
@@ -74,6 +71,10 @@ const ViewPoint = () => {
                   }
          
                     </div>
+        <div className="point-card point-card-large">
+            <div className="card-content">
+                    <p className="point-name">{sequenceNo + 1}. {point.name}</p>
+                  
                     <EmbedStreetView width={width} height={height} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
              </div>
         </div>
