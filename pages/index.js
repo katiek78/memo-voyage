@@ -9,6 +9,7 @@ const Index = ({ journeys }) => {
 
   return(
   <>
+  <h1>MemoVoyage</h1>
     {/* Create a card for each journey */}
     {journeys.map((journey) => (
       <div key={journey._id}>
