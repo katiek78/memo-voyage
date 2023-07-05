@@ -17,6 +17,7 @@ const JourneySchema = new mongoose.Schema({
       heading: {type: Number},
       pitch: {type: Number},
       fov: {type: Number},
+      memoItem: {type: String}
     })
   ],
   image_url: {

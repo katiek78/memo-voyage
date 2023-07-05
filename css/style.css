@@ -103,7 +103,7 @@ details {
 .point-card {
   display: inline-block;
   width: 350px;
-  height: 350px;
+  height: 400px;
   text-align: center;
   overflow: hidden;
   border: 1.25px solid rgb(233, 233, 233);

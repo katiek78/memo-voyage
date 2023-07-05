@@ -49,21 +49,31 @@ const JourneyPage = ({ journey }) => {
         <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
         <button className="btn add">Add a point</button>
         </Link>
+        
         <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
         <button className="btn edit">Edit journey</button>
         </Link>
+
+        {journey.points.length > 0 ? 
+        <Link href="/[id]/view" as={`/${journey.points[0]._id}/view`} legacyBehavior>
+        <button className="btn">Slideshow</button>
+        </Link>
+        : <></>}
+
         <button className="btn delete" onClick={handleDelete}>
                 Delete journey
         </button>
+       
       </div>
 
       {journey.points?.map(point => 
-      <div onClick={() => router.push(`/${point._id}/view`)} className="point-card">
+      <div className="point-card">
         {/* <img src={journey.image_url} /> */}
         {/* <h5 className="pet-name">{point.name}</h5> */}
         <div className="card-content">
-          <p className="point-name">{point.name}</p>
+          <p  onClick={() => router.push(`/${point._id}/view`)} className="point-name">{point.name}</p>
           <EmbedStreetView width={300} height={200} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
+          <p className="point-memo-item">{point.memoItem}</p>
           {/* <p className="owner">Owner: {pet.owner_name}</p> */}
 
           {/* Extra Pet Info: Likes and Dislikes */}

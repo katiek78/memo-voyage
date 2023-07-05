@@ -15,13 +15,13 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
     location: pointForm.location,
     heading: pointForm.heading || 90,
     pitch: pointForm.pitch || 0,
-    fov: pointForm.fov || 100
+    fov: pointForm.fov || 100,
+    memoItem: pointForm.memoItem
   })
 
   /* The PUT method edits an existing entry in the mongodb database. */
   const putData = async (form) => {
-    const { id } = router.query
-
+    const { id } = router.query    
     try {
       const res = await fetch(`/api/points/${id}`, {
         method: 'PUT',
@@ -203,6 +203,15 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
             />
           </div>
         }
+
+        <label htmlFor="memoItem">What would you like to store here?</label>
+        <input
+          type="text"
+          maxLength="60"
+          name="memoItem"
+          value={form.memoItem}
+          onChange={handleChange}         
+        />
 
         <button type="submit" className="btn">
           Submit

@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       try {      
         const journey = await Journey.findOneAndUpdate(
           {points: {$elemMatch:{_id: id}}}, 
-          { $set: { 'points.$.name': req.body.name, 'points.$.location' : req.body.location, 'points.$.heading' : req.body.heading, 'points.$.pitch' : req.body.pitch, 'points.$.fov' : req.body.fov}
+          { $set: { 'points.$.name': req.body.name, 'points.$.location' : req.body.location, 'points.$.heading' : req.body.heading, 'points.$.pitch' : req.body.pitch, 'points.$.fov' : req.body.fov, 'points.$.memoItem' : req.body.memoItem}
       }, {
           new: true,
           runValidators: true,

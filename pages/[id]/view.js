@@ -69,6 +69,10 @@ const ViewPoint = () => {
                         </Link>
                   :    <button className="btn next btn-disabled">Next</button>
                   }
+
+                  <Link href="/[id]" as={`/${thisJourney._id}`} legacyBehavior>
+                    <button className="btn">Back to journey</button>
+                 </Link>
          
                     </div>
         <div className="point-card point-card-large">
@@ -80,12 +84,7 @@ const ViewPoint = () => {
         </div>
      </div>
     </>
-    {/* <div className="point-card point-card-large">
-        <div className="card-content">
-            <p className="point-name">{point.name}</p>
-            <EmbedStreetView width={300} height={200} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
-        </div>
-    </div> */}
+  
    
 }
 

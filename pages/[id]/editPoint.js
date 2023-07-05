@@ -27,7 +27,8 @@ const EditPoint = () => {
     location: point.location,
     heading: point.heading,
     pitch: point.pitch,
-    fov: point.fov
+    fov: point.fov,
+    memoItem: point.memoItem
   }
 
   return <PointForm formId="edit-point-form" pointForm={pointForm} forNewPoint={false} />
