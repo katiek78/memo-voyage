@@ -58,7 +58,7 @@ const JourneyPage = ({ journey }) => {
       </div>
 
       {journey.points?.map(point => 
-      <div className="point-card">
+      <div onClick={() => router.push(`/${point._id}/view`)} className="point-card">
         {/* <img src={journey.image_url} /> */}
         {/* <h5 className="pet-name">{point.name}</h5> */}
         <div className="card-content">
