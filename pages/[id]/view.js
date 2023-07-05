@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
+import Link from 'next/link'
 import EmbedStreetView from '../../components/EmbedStreetView'
 
 const fetcher = (url) =>
@@ -42,6 +43,21 @@ const ViewPoint = () => {
         <div className="point-card point-card-large">
             <div className="card-content">
                     <p className="point-name">{sequenceNo + 1}. {point.name}</p>
+                    <div className="point-btn-container">       
+                  {sequenceNo > 0 ?
+                        <Link href="/[id]/view" as={`/${thisJourney.points[sequenceNo - 1]._id}/view`} legacyBehavior>
+                        <button className="btn previous">Previous</button>
+                        </Link>
+                  :    <button className="btn previous btn-disabled">Previous</button>
+                  }
+                  {sequenceNo < thisJourney.points.length - 1 ?
+                        <Link href="/[id]/view" as={`/${thisJourney.points[sequenceNo + 1]._id}/view`} legacyBehavior>
+                        <button className="btn next">Next</button>
+                        </Link>
+                  :    <button className="btn next btn-disabled">Next</button>
+                  }
+         
+                    </div>
                     <EmbedStreetView width={1150} height={600} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
              </div>
         </div>

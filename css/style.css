@@ -130,6 +130,11 @@ details {
   flex-direction: column;
 }
 
+.btn-disabled {
+  color: lightgrey;
+  opacity: 0.3;
+}
+
 .owner {
   color: grey;
   font-size: 110%;
@@ -210,6 +215,13 @@ li {
   color: white;
 }
 
+.btn-disabled:hover {
+  /*To see no effect except the disabled ones, resets the effects of hover to default of button*/
+  background: transparent;
+  color: var(--accent);
+}
+
+
 .add.btn {
   --accent: orange;
 }
@@ -227,6 +239,15 @@ li {
   --accent: blue;
   margin-left: 10px;
 }
+
+.previous.btn {
+  --accent: turquoise;
+}
+
+.next.btn {
+  --accent: turquoise;
+}
+
 
 /* Delete Pet */
 .pet-container {
