@@ -47,7 +47,7 @@ const ViewPoint = () => {
     if (mobileView) {
         width = 300, height = 200;
     } else if (largeView) {
-        width = 900, height = 600;
+        width = 900, height = 500;
     } else {
         width = 400, height = 300;
     }
