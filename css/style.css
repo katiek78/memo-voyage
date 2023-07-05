@@ -119,12 +119,12 @@ details {
   font-size: 110%;
 }
 
-.pet-name {
+.point-name {
   font-weight: bold;
   font-size: 100%;
 }
 
-h5.pet-name {
+h5.point-name {
   color: white;
   position: absolute;
   left: 0;
