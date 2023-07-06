@@ -39,11 +39,12 @@ const JourneyPage = ({ journey }) => {
   }
 
   const renderPageNumbers = () => {   
-    let span = [];
+    let div = [];
     for (let i = 0; i < journey.points.length / pageLimit; i++) {
-      span.push(<><span className='page-number' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</span>{(i < journey.points.length/pageLimit - 1) ? <span>  |  </span> : <span></span>}</>);
+    //  div.push(<div className='page-number' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</div>);
+    div.push(<button className='btn previous' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</button>);
     }
-    return span;
+    return div;
   };
 
   const handlePageChange = (page) => {
@@ -52,78 +53,88 @@ const JourneyPage = ({ journey }) => {
 
   return (
     <div key={journey._id}>
-      <div className='journey-header'>
-        <h2>{journey.name}</h2>
+      {/* <div className='journey-header'> */}
+        {/* <h2>{journey.name}</h2> */}
         
-        {(!journey.points || journey.points.length === 0) &&
-          <h3>Your journey doesn't have any points yet.</h3>
-        }
-
-        <div className='journey-btn-container'>
-          <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
-          <button className="btn add">Add a point</button>
-          </Link>
-
-          <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
-          <button className="btn edit">Edit journey</button>
-          </Link>
-
-          {journey.points.length > 0 ? 
-          <Link href="/[id]/view" as={`/${journey.points[0]._id}/view`} legacyBehavior>
-          <button className="btn">Slideshow</button>
-          </Link>
-          : <></>}
-
-          <button className="btn delete" onClick={handleDelete}>
-                  Delete journey
-          </button>
-        
-          {renderPageNumbers()}
-        </div>
-      </div>
-
-      {journey.points?.map((point,i) => 
-      i < currentPage*pageLimit && i >= (currentPage - 1)*pageLimit ?
-      <div className="point-card">
-        {/* <img src={journey.image_url} /> */}
-        {/* <h5 className="pet-name">{point.name}</h5> */}
-        <div className="card-content">
-          <p  onClick={() => router.push(`/${point._id}/view`)} className="point-name">{i + 1}. {point.name}</p>
-          <EmbedStreetView width={300} height={200} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
-          <p className="point-memo-item">{point.memoItem}</p>
-          {/* <p className="owner">Owner: {pet.owner_name}</p> */}
-
-          {/* Extra Pet Info: Likes and Dislikes */}
-          {/* <div className="likes info">
-            <p className="label">Likes</p>
-            <ul>
-              {pet.likes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
-          </div>
-          <div className="dislikes info">
-            <p className="label">Dislikes</p>
-            <ul>
-              {pet.dislikes.map((data, index) => (
-                <li key={index}>{data} </li>
-              ))}
-            </ul>
-          </div> */}
-
-          <div className="point-btn-container">
-            <Link href="/[id]/editPoint" as={`/${point._id}/editPoint`} legacyBehavior>
-              <button className="btn edit">Edit</button>
+      
+        <div className="title-and-content">
+             <div className="title">Journey: {journey.name}</div>
+         
+         <div className='wrapper'>
+          <div className='journey-btn-container'>
+            <Link href="/[id]/new" as={`/${journey._id}/new`} legacyBehavior>
+            <button className="btn add">Add a point</button>
             </Link>
-            <button className="btn delete" onClick={() => handleDeletePoint(point._id)}>
-              Delete
+
+            <Link href="/[id]/edit" as={`/${journey._id}/edit`} legacyBehavior>
+            <button className="btn edit">Edit journey</button>
+            </Link>
+
+            {journey.points.length > 0 ? 
+            <Link href="/[id]/view" as={`/${journey.points[0]._id}/view`} legacyBehavior>
+            <button className="btn">Slideshow</button>
+            </Link>
+            : <></>}
+
+            <button className="btn delete" onClick={handleDelete}>
+                    Delete journey
             </button>
+          
+          
+          </div>
+          
+          <div className='page-number-container'>  {renderPageNumbers()}</div>
+          </div>
+          </div>
+      {/* </div> */}
+      <div className='grid wrapper card-container'>
+        {(!journey.points || journey.points.length === 0) &&
+            <h3>Your journey doesn't have any points yet.</h3>
+          }
+
+        {journey.points?.map((point,i) => 
+        i < currentPage*pageLimit && i >= (currentPage - 1)*pageLimit ?
+        <div className="point-card">
+          {/* <img src={journey.image_url} /> */}
+          {/* <h5 className="pet-name">{point.name}</h5> */}
+          <div className="card-content">
+            <p  onClick={() => router.push(`/${point._id}/view`)} className="point-name">{i + 1}. {point.name}</p>
+            <EmbedStreetView width={300} height={200} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
+            <p className="point-memo-item">{point.memoItem}</p>
+            {/* <p className="owner">Owner: {pet.owner_name}</p> */}
+
+            {/* Extra Pet Info: Likes and Dislikes */}
+            {/* <div className="likes info">
+              <p className="label">Likes</p>
+              <ul>
+                {pet.likes.map((data, index) => (
+                  <li key={index}>{data} </li>
+                ))}
+              </ul>
+            </div>
+            <div className="dislikes info">
+              <p className="label">Dislikes</p>
+              <ul>
+                {pet.dislikes.map((data, index) => (
+                  <li key={index}>{data} </li>
+                ))}
+              </ul>
+            </div> */}
+
+            <div className="point-btn-container">
+              <Link href="/[id]/editPoint" as={`/${point._id}/editPoint`} legacyBehavior>
+                <button className="btn edit">Edit</button>
+              </Link>
+              <button className="btn delete" onClick={() => handleDeletePoint(point._id)}>
+                Delete
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+    
       : <></>)}
       
-     
+      </div>
       {message && <p>{message}</p>}
     </div>
   )

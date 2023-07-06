@@ -75,13 +75,15 @@ const ViewPoint = () => {
                  </Link>
          
                     </div>
-        <div className="point-card point-card-large">
-            <div className="card-content">
-                    <p className="point-name">{sequenceNo + 1}. {point.name}</p>
-                    <p className="memo-item">{point.memoItem}</p>
-                    <EmbedStreetView width={width} height={height} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
-                    
-             </div>
+        <div className='card-container'>
+          <div className="point-card point-card-large">
+              <div className="card-content">
+                      <p className="point-name">{sequenceNo + 1}. {point.name}</p>
+                      <p className="memo-item">{point.memoItem}</p>
+                      <EmbedStreetView width={width} height={height} location={point.location} heading={point.heading || 90} pitch={point.pitch || 0} fov={point.fov || 100} />
+                      
+              </div>
+          </div>
         </div>
      </div>
     </>

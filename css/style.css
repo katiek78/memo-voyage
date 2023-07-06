@@ -192,12 +192,23 @@ li {
   padding: 10px;
 }
 
+.card-container {
+  display:flex;
+  justify-content: center;
+}
+
 .journey-btn-container * {
   margin:5px;
 }
 
+.page-number-container * {
+  margin:5px;
+ 
+}
+
 .journey-header {
   text-align:left;
+ /* display:flex;*/
 }
 
 .btn {
