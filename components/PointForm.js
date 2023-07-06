@@ -104,22 +104,28 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
 
    const validateLocation = (locationValue) => {
     function getPosition(str, char, index) {
-        return str.split(char, index).join(char).length;
+        const lengthTillChar = str.split(char, index).join(char).length;
+        return lengthTillChar === str.length ? -1 : lengthTillChar;
       }
 
     //if it includes @ then parse as a Google Street View URL
     if (locationValue.includes('@')) {
+        console.log(locationValue)
         const slicedLocationValue = locationValue.slice(locationValue.indexOf('@') + 1);
+        console.log(slicedLocationValue)
         const secondCommaAt = getPosition(slicedLocationValue, ',', 2)
         const parsedLocation = slicedLocationValue.slice(slicedLocationValue.indexOf('@') + 1, secondCommaAt);        
         //get heading, pitch and fov values too
         const thirdCommaAt = getPosition(slicedLocationValue, ',', 3);
-        const fov = slicedLocationValue.slice(thirdCommaAt + 1, slicedLocationValue.indexOf('y'))   
-        const fourthCommaAt = getPosition(slicedLocationValue, ',', 4)        
-        const heading = slicedLocationValue.slice(fourthCommaAt + 1, slicedLocationValue.indexOf('h'));    
-        const fifthCommaAt = getPosition(slicedLocationValue, ',', 5);
-        const pitch = slicedLocationValue.slice(fifthCommaAt + 1, slicedLocationValue.indexOf('t'));        
-
+        let fov = 0, heading = 0, pitch = 90;
+        if (thirdCommaAt > -1) {
+          fov = slicedLocationValue.slice(thirdCommaAt + 1, slicedLocationValue.indexOf('y'))   
+          const fourthCommaAt = getPosition(slicedLocationValue, ',', 4)        
+          heading = slicedLocationValue.slice(fourthCommaAt + 1, slicedLocationValue.indexOf('h'));    
+          const fifthCommaAt = getPosition(slicedLocationValue, ',', 5);
+          pitch = slicedLocationValue.slice(fifthCommaAt + 1, slicedLocationValue.indexOf('t'));        
+        }
+        console.log(parsedLocation)
         locationValue = parsedLocation;
         return {...form, location: parsedLocation, heading, pitch: (pitch - 90).toFixed(2), fov};
     }
@@ -158,7 +164,7 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
         <label htmlFor="location">Location</label>
         <input
           type="text"
-          maxLength="100"
+          maxLength="500"
           name="location"
           value={form.location}
           onChange={handleChange}          

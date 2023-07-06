@@ -9,6 +9,7 @@ const Index = ({ journeys }) => {
 
   return(
   <>
+  <div className="grid">
   <h1>MemoVoyage</h1>
     {/* Create a card for each journey */}
     {journeys.map((journey) => (
@@ -34,6 +35,7 @@ const Index = ({ journeys }) => {
         </div>
       </div>
     ))}
+    </div>
   </>
   )
 }

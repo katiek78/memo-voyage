@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
           alt="MemoVoyage logo"
         ></img>
       </div>
-      <div className="grid wrapper">
+      <div className="wrapper">
         <Component {...pageProps} />
       </div>
     </>
