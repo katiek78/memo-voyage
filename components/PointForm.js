@@ -119,7 +119,7 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
         let exclamationIndex = removed.indexOf("!");
         parsedLocation = exclamationIndex !== -1 ? removed.slice(0, exclamationIndex) : removed;
   
-        return {...form, location: parsedLocation, heading: 0, pitch: 0, fov: 0};
+        return {...form, location: parsedLocation, heading: 0, pitch: 0, fov: 100};
       } else {       
         slicedLocationValue = locationValue.slice(locationValue.indexOf('@') + 1);
         
