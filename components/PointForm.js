@@ -110,11 +110,21 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
 
     //if it includes @ then parse as a Google Street View URL
     if (locationValue.includes('@')) {
-        console.log(locationValue)
-        const slicedLocationValue = locationValue.slice(locationValue.indexOf('@') + 1);
-        console.log(slicedLocationValue)
+      let slicedLocationValue = "", parsedLocation = "";
+ 
+
+      if (locationValue.includes('!3d')) {
+        slicedLocationValue = locationValue.slice(locationValue.indexOf('!3d') + 3);
+        let removed = slicedLocationValue.replace("4d", "").replace("!",",");
+        let exclamationIndex = removed.indexOf("!");
+        parsedLocation = exclamationIndex !== -1 ? removed.slice(0, exclamationIndex) : removed;
+  
+        return {...form, location: parsedLocation, heading: 0, pitch: 0, fov: 0};
+      } else {       
+        slicedLocationValue = locationValue.slice(locationValue.indexOf('@') + 1);
+        
         const secondCommaAt = getPosition(slicedLocationValue, ',', 2)
-        const parsedLocation = slicedLocationValue.slice(slicedLocationValue.indexOf('@') + 1, secondCommaAt);        
+        parsedLocation = slicedLocationValue.slice(slicedLocationValue.indexOf('@') + 1, secondCommaAt);        
         //get heading, pitch and fov values too
         const thirdCommaAt = getPosition(slicedLocationValue, ',', 3);
         let fov = 0, heading = 0, pitch = 90;
@@ -125,9 +135,9 @@ const PointForm = ({ formId, pointForm, forNewPoint = true }) => {
           const fifthCommaAt = getPosition(slicedLocationValue, ',', 5);
           pitch = slicedLocationValue.slice(fifthCommaAt + 1, slicedLocationValue.indexOf('t'));        
         }
-        console.log(parsedLocation)
-        locationValue = parsedLocation;
+            
         return {...form, location: parsedLocation, heading, pitch: (pitch - 90).toFixed(2), fov};
+      }
     }
     //if it starts with ( then parse as a coordinates set from mobile app (need to remove brackets and spaces)
     if (locationValue[0] === '(') {    
