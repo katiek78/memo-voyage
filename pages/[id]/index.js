@@ -42,7 +42,9 @@ const JourneyPage = ({ journey }) => {
     let div = [];
     for (let i = 0; i < journey.points.length / pageLimit; i++) {
     //  div.push(<div className='page-number' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</div>);
-    div.push(<button className='btn previous' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</button>);
+      if (i == currentPage - 1) {
+        div.push(<button className='btn page-number page-number-selected' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</button>);
+      } else div.push(<button className='btn page-number' onClick={() => handlePageChange(i+1)} key={i+1}>{i+1}</button>);
     }
     return div;
   };
